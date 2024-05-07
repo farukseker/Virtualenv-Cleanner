@@ -13,8 +13,15 @@ getLogger = logging.getLogger
 
 virtualized_directories_names: list[str] = [
     'venv',
+    '.venv',
     'Scripts'
 ]
 # can_delete: bool = input('delete without asking y/s').lower() == 'y'
 can_delete: bool = True
 
+deleted_color: str = 'red'
+skipped_color: str = 'green'
+
+backup_requirements_text_name: str = 'requirements_backup.txt'
+
+create_backup_requirements_text: bool = True

@@ -1,6 +1,8 @@
+import shutil
 import tkinter as tk
 from tkinter import filedialog
 import config
+import os
 
 
 def select_directory():
@@ -58,4 +60,32 @@ def ask_to_user_true_false(default: bool | None, ask_message: str) -> bool:
     return ask()
 
 
+def requirements_txt_create(root_dir, venv_path):
+    logger = config.getLogger('utils-requirements-txt-create')
+    try:
+
+        requirements_file = os.path.join(root_dir, config.backup_requirements_text_name)
+        if not os.path.exists(requirements_file):
+            with open(requirements_file, 'w') as f:
+                pip_freeze_command = f"{venv_path}\\Scripts\\pip freeze"
+                pip_freeze_output = os.popen(pip_freeze_command).read()
+                f.write(pip_freeze_output)
+                logger.info(f"'requirements.txt' dosyası {root_dir} altında oluşturuldu.")
+    except Exception as exception:
+        logger.critical(exception)
+
+def delete_folder(folder_path):
+    logger = config.getLogger('utils-delete-folder')
+    try:
+        user_input = True if config.can_delete else ask_to_user_true_false(None,
+                                                                           f"Do U want to delete the folder'{folder_path}'?")
+        if user_input:
+            shutil.rmtree(folder_path)
+            logger.info(f"Deleted: {folder_path}")
+            print(f"Deleted: {folder_path}")
+        else:
+            logger.info(f"Skipped: {folder_path}")
+            print(f"Skipped: {folder_path}")
+    except Exception as exception:
+        logger.critical(exception)
 
