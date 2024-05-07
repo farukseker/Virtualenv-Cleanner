@@ -21,6 +21,8 @@ def select_directory():
 
 def ask_to_user_true_false(default: bool | None, ask_message: str) -> bool:
     """
+    ask_to_user_true_false(True, '[your question]')
+
     :param ask_message:str:[your question]
 
     :param default:bool:True
@@ -56,5 +58,4 @@ def ask_to_user_true_false(default: bool | None, ask_message: str) -> bool:
     return ask()
 
 
-print(ask_to_user_true_false(True, '[your question]'))
 
