@@ -25,10 +25,7 @@ If the user approves the backup option, a backup of the libraries used in the vi
 
 ``virtualenv venv``
 
-``cd venv/Scripts/``
-``activate``
-
-``cd ..`` ``cd ..``
+``source venv/bin/activate  # or venv\Scripts\activate (Windows)``
 
 ``pip install -r requirements_backup.txt``
 
