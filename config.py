@@ -18,7 +18,6 @@ virtualized_directories_names: list[str] = [
 ]
 # can_delete: bool = input('delete without asking y/s').lower() == 'y'
 can_delete: bool = True
-
 deleted_color: str = 'red'
 skipped_color: str = 'green'
 

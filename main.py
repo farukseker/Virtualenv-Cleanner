@@ -12,7 +12,7 @@ def delete_venv_scripts_folders(directory):
         for virtual_dir_name in config.virtualized_directories_names:
             if virtual_dir_name in dirs:
                 venv_path = os.path.join(root, virtual_dir_name)
-                if config.create_backup_requirements_text:
+                if config.create_backup_requirements_text or not virtual_dir_name.startswith('__'):
                     requirements_txt_create(root, venv_path)
                 delete_folder(venv_path)
 
@@ -28,6 +28,9 @@ def main():
         config.create_backup_requirements_text = ask_to_user_true_false(config.create_backup_requirements_text,
                                                                         'create backup_requirements.text ?')
 
+        if ask_to_user_true_false(True, 'Do you want to delete cache files if there are any?'):
+            config.virtualized_directories_names.append('__pycache__')
+        
         print('START')
         delete_venv_scripts_folders(target_directory)
         print('END')
