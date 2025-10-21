@@ -77,8 +77,11 @@ def requirements_txt_create(root_dir, venv_path):
 def delete_folder(folder_path):
     logger = config.getLogger('utils-delete-folder')
     try:
-        user_input = True if config.can_delete else ask_to_user_true_false(None,
-                                                                           f"Do U want to delete the folder'{folder_path}'?")
+        user_input = (
+            True 
+            if config.can_delete 
+            else ask_to_user_true_false(None,f"Do U want to delete the folder'{folder_path}'?")
+        )
         if user_input:
             shutil.rmtree(folder_path)
             logger.info(f"Deleted: {folder_path}")
